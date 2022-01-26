@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500;600;700&display=swap');
+@import './variables';
+@import './mixins';
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Spartan', sans-serif;
+}
+
+//active img
+.activeSlide{
+    display: block !important;
+    animation: fade 3s;
+}
+
+//animation slider 
+@keyframes fade {
+	0%, 15%, 100% {
+		left: 0px; /*1ère image*/
+	}
+	35%, 50% {
+		left: -150px; /*2ème image*/
+	}
+	70%, 85% {
+		left: -300px; /*3ème image*/
+	}
+}
+
+//  section box slider 
+.positionSlide{
+
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+
+    .style-p{
+        font-size: 12px;
+        color: $darkGray;
+        line-height: 1.7em;
+    }
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+
+    @include desktop{
+        display: grid;
+        grid-template-columns: 30% 30% 10% 30%;
+        grid-template-rows: 70% 1fr;
+    }
+
+    header{
+        
+        height: 40vh;
+        width: 100%;
+        position: relative;
+
+        @include desktop{
+            height: 100%;
+            grid-column: 1/3;
+        }
+
+        .imgSlide{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            
+            img{
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: none;
+            }
+        }
+
+        .logo{
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-10%, -50%);
+
+            @include desktop{
+                left: 10%;
+            }
+        }
+
+        .toggle{
+            position: absolute;
+            top: 8%;
+            left: 5%;
+            cursor: pointer;
+            transform: translate(-5%, -8%);
+
+            @include desktop{
+                display: none;
+            }
+        }
+
+        .nav{
+            background: $white;
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+            display: none;
+            
+            @include desktop{
+                display: block;
+                background: transparent;
+                width:  40%;
+                left: 25%;
+                top: -20px;
+            }
+
+            ul{
+                height: 20vh;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                align-content: center;
+
+                li{
+                    list-style: none;
+                    
+                    a{
+                        text-decoration: none;
+                        color: $black;
+                        transition: ease 0.5s;
+
+                        @include desktop{
+                            color: $white;
+                        }
+
+                        &:hover{
+                            padding-bottom: 5px ;
+                            border-bottom: 2px solid black;
+
+                            @include desktop{
+                                border-bottom: 2px solid white;
+                            }
+                        }
+                    }
+
+                    img{
+                        cursor: pointer;
+                    }
+
+                    &:nth-child(1){
+                        @include desktop{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .sliderButton{
+            width: 100px;
+            height: 60px;
+            background-color: $black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+            @include desktop{
+                transform: translateX(100%);
+            }
+            .left, .right{
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                position: relative;
+                transition: 0.2s;
+                cursor: pointer;
+
+                &:hover{
+                    background: $darkGray;
+                }
+            }
+            img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                object-fit: cover;  
+            }
+        }
+    }
+}
+
+.section__slider{
+    
+    width: 100%;
+    height: 400px;
+    position: relative;
+
+    @include desktop{
+        grid-column: 3/5;
+    }
+
+    h2{
+        font-size: 25px;
+        font-weight: 600;
+        margin: 20px 0;
+
+        @include desktop{
+            font-size: 30px;
+            font-weight: 600;
+        }
+    }
+
+    a{
+        display: block;
+        margin-top: 30px;
+        text-decoration: none;
+        color: $veryDark;
+        letter-spacing: 8px;
+        font-size: 14px;
+
+        span{
+            display: inline-block;
+            font-size: 50px;
+            width: 100px;
+            transition: 0.2s;
+            transform: translateY(5px);
+        } 
+
+        &:hover{
+            color: $darkGray;
+        }
+    }
+}
+
+.about__img-dark, .about__img-light{
+    width: 100%;
+    height: 400px;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.about__img-dark{
+
+    @include desktop{
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+}
+
+.about__img-light{
+    @include desktop{
+        grid-column: 4/5;
+        grid-row: 2/3;
+    }
+}
+
+.section__about{
+    
+    position: relative;
+    width: 100%;
+    height: 400px;
+
+    @include desktop{
+        height: 100%;
+        grid-column: 2/4;
+        grid-row: 2/3;
+        
+    }
+
+    .about__content{
+        @extend .positionSlide;
+        display: block;
+        
+        h3{
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 15px 0;
+        }
+
+        p{
+            @extend .style-p;
+        }
+    }
+}
